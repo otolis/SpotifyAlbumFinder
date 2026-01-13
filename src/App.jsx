@@ -97,29 +97,27 @@ function App() {
     if (anime) anime({ targets: e.currentTarget, scale: 1, duration: 600, easing: "easeOutQuad" });
   };
 
-  // 6. Shake & Search Fix (UPDATED)
+  // 6. Shake & Search Fix
   const shakeSearch = () => {
     if (!anime) return;
     const pillElement = document.querySelector('.search-pill'); 
     
     if (pillElement) {
-      // ✨ TRICK: Turn off CSS transition so it shakes INSTANTLY
+      // Temporarily remove CSS transition so Shake works instantly
       pillElement.style.transition = 'none';
 
       anime({
         targets: pillElement,
-        // Stronger shake (15px instead of 10px)
         translateX: [-15, 15, -15, 15, 0], 
-        // Red Flash Shadow
         boxShadow: [
           '0 8px 20px rgba(0,0,0,0.3)', 
-          '0 8px 20px rgba(255,0,0,0.8)', 
+          '0 8px 20px rgba(255,0,0,0.8)', // Red Flash
           '0 8px 20px rgba(0,0,0,0.3)'
         ],
         easing: "easeInOutSine",
         duration: 400,
         complete: () => {
-          // ✨ Restore CSS transition when done so hover still looks nice
+          // Restore CSS transition for smooth hover effects
           pillElement.style.transition = ''; 
         }
       });

@@ -47,7 +47,7 @@
   transform: translateY(-3px);
 }
 
-/* --- MODERN SEARCH BAR (THE FIX) --- */
+/* --- MODERN SEARCH BAR --- */
 .search-container-modern {
   display: flex;
   justify-content: center;
@@ -57,7 +57,7 @@
   z-index: 100;
 }
 
-/* This creates the pill shape */
+/* Pill Shape Container */
 .search-pill {
   background: white;
   border-radius: 50px;
@@ -65,12 +65,12 @@
   display: flex;
   width: 100%;
   max-width: 500px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Deep shadow to float */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
   transition: transform 0.2s;
 }
 
 .search-pill:hover {
-  transform: translateY(-2px); /* Slight lift on hover */
+  transform: translateY(-2px);
 }
 
 .search-input-modern {
@@ -81,11 +81,11 @@
   color: #333 !important;
   flex-grow: 1;
   outline: none !important;
-  box-shadow: none !important; /* Removes Bootstrap blue glow */
+  box-shadow: none !important;
 }
 
 .search-btn-modern {
-  background-color: #1DB954 !important; /* Spotify Green */
+  background-color: #1DB954 !important; 
   color: white !important;
   border: none !important;
   border-radius: 40px !important;
