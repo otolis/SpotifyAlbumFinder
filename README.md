@@ -48,6 +48,14 @@ Create a `.env` file with your Spotify API keys:
 SPOTIFY_CLIENT_ID=your_client_id
 SPOTIFY_CLIENT_SECRET=your_client_secret
 ```
+## Tech Stack
+- Frontend: React, Vite
+
+- Styling: CSS3, React Bootstrap
+
+- Animation: Anime.js
+
+- API: Spotify Web API
 
 ## Contributing
 
