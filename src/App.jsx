@@ -81,11 +81,25 @@ function App() {
     }
   }, [albums, anime]);
 
-  // 4. Hero Animation
+  // 4. Hero Animation (Visualizer + LOGO DRAWING)
   useEffect(() => {
     if (albums.length === 0 && anime) {
+      
+      // A. Text & Bars
       anime({ targets: '.hero-title', opacity: [0, 1], translateY: [-20, 0], duration: 1000, delay: 200, easing: 'easeOutExpo' });
       anime({ targets: '.vis-bar', height: ['20px', '100px'], duration: 400, direction: 'alternate', loop: true, delay: anime.stagger(100), easing: 'easeInOutSine' });
+
+      // B. ✨ LOGO DRAWING ANIMATION ✨
+      anime({
+        targets: '.spotify-path',
+        strokeDashoffset: [anime.setDashoffset, 0], // The "Draw" command
+        opacity: [0, 1], 
+        easing: 'easeInOutSine',
+        duration: 1500, 
+        delay: function(el, i) { return i * 250 }, 
+        direction: 'alternate', 
+        loop: true 
+      });
     }
   }, [albums, anime]);
 
@@ -103,23 +117,14 @@ function App() {
     const pillElement = document.querySelector('.search-pill'); 
     
     if (pillElement) {
-      // Temporarily remove CSS transition so Shake works instantly
       pillElement.style.transition = 'none';
-
       anime({
         targets: pillElement,
         translateX: [-15, 15, -15, 15, 0], 
-        boxShadow: [
-          '0 8px 20px rgba(0,0,0,0.3)', 
-          '0 8px 20px rgba(255,0,0,0.8)', // Red Flash
-          '0 8px 20px rgba(0,0,0,0.3)'
-        ],
+        boxShadow: ['0 8px 20px rgba(0,0,0,0.3)', '0 8px 20px rgba(255,0,0,0.8)', '0 8px 20px rgba(0,0,0,0.3)'],
         easing: "easeInOutSine",
         duration: 400,
-        complete: () => {
-          // Restore CSS transition for smooth hover effects
-          pillElement.style.transition = ''; 
-        }
+        complete: () => { pillElement.style.transition = ''; }
       });
     }
   };
@@ -155,7 +160,22 @@ function App() {
       <div ref={progressRef} className="scroll-progress"></div>
       <button ref={topBtnRef} className="back-to-top" onClick={scrollToTop}>↑</button>
 
-      {/* --- SEARCH SECTION --- */}
+      {/* --- 1. TOP LOGO (Only when empty) --- */}
+      {albums.length === 0 && (
+        <div className="logo-container" style={{ marginTop: '50px' }}>
+          <svg className="spotify-drawing-svg" viewBox="0 0 168 168">
+            <path className="spotify-path" d="M84,0C37.6,0,0,37.6,0,84s37.6,84,84,84s84-37.6,84-84S130.4,0,84,0z" />
+            <path className="spotify-path" d="M124.6,121.7c-1.6,2.5-4.8,3.3-7.3,1.7c-20-12.2-45.2-14.9-74.9-8.2c-2.8,0.6-5.6-1.1-6.2-3.9
+              c-0.6-2.8,1.1-5.6,3.9-6.2c32.7-7.4,60.7-4.3,82.9,9.3C125.5,116,126.3,119.2,124.6,121.7z" />
+            <path className="spotify-path" d="M135.2,98.6c-2.1,3.3-6.4,4.4-9.7,2.3c-22.9-14.1-57.8-18.2-84.9-10
+              c-3.6,1.1-7.5-1-8.6-4.6c-1.1-3.6,1-7.5,4.6-8.6c31.1-9.4,70.2-4.8,96.3,11.2C136.2,91,137.3,95.3,135.2,98.6z" />
+            <path className="spotify-path" d="M136.4,75.1c-27.4-16.3-72.7-17.8-98.9-9.8c-4.2,1.3-8.7-1.1-9.9-5.3c-1.3-4.2,1.1-8.7,5.3-9.9
+              c30.8-9.3,81.1-7.6,113.1,11.4c3.8,2.2,5,7.1,2.8,10.9C146.5,76.1,141.6,77.4,136.4,75.1z" />
+          </svg>
+        </div>
+      )}
+
+      {/* --- 2. SEARCH BAR --- */}
       <Container className="search-container-modern">
         <div className="search-pill">
           <FormControl
@@ -169,9 +189,9 @@ function App() {
         </div>
       </Container>
 
-      {/* --- HERO SECTION --- */}
+      {/* --- 3. BOTTOM VISUALIZER (Only when empty) --- */}
       {albums.length === 0 && (
-        <Container className="hero-container">
+        <Container className="hero-container" style={{ minHeight: 'auto' }}>
           <h1 className="hero-title">Find Your Rhythm</h1>
           <div className="visualizer-container">
             <div className="vis-bar bar-1"></div>

@@ -208,3 +208,30 @@
   border-color: white;
   transform: scale(1.02);
 }
+
+/* --- LOGO DRAWING SECTION --- */
+.logo-container {
+  position: relative;
+  width: 150px; /* Big logo size */
+  height: 150px;
+  margin: 0 auto 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spotify-drawing-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* We set fill to none so we only see the drawing lines */
+.spotify-path {
+  fill: none;
+  stroke: #1DB954; /* Spotify Green */
+  stroke-width: 2; /* Thickness of the line */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0; /* Hidden until animation starts */
+}
